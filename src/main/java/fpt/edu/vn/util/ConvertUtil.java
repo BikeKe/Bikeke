@@ -15,7 +15,21 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 
 public class ConvertUtil {
-    public static AccountDTO accountToAccountDTO(Account account){
+    public static Account accountDTOtoAccount(AccountDTO accountDTO) {
+        if (accountDTO != null) {
+            Long id = accountDTO.getId();
+            String email = accountDTO.getEmail();
+            String name = accountDTO.getName();
+            String phone = accountDTO.getPhone();
+            String img = accountDTO.getImg();
+            String gender = accountDTO.getGender().getGender();
+
+            return new Account(id, email, name, phone, img, gender, null);
+        }
+        return null;
+    }
+
+    public static AccountDTO accountToAccountDTO(Account account) {
         if (account != null) {
             Long id = account.getId();
             String email = account.getEmail();
@@ -30,7 +44,7 @@ public class ConvertUtil {
         return null;
     }
 
-    public static AdminDTO adminToAdminDTO(Admin admin){
+    public static AdminDTO adminToAdminDTO(Admin admin) {
         if (admin != null) {
             Long id = admin.getId();
             boolean isSuper = admin.isSuper();
@@ -40,7 +54,7 @@ public class ConvertUtil {
         return null;
     }
 
-    public static CustomerDTO customerToCustomerDTO(Customer customer){
+    public static CustomerDTO customerToCustomerDTO(Customer customer) {
         if (customer != null) {
             Long id = customer.getId();
             EnumAccountStatus status = EnumAccountStatus.getStatusConst(customer.getStatus());
@@ -49,8 +63,8 @@ public class ConvertUtil {
         return null;
     }
 
-    public static DriverDTO driverToDriverDTO(Driver driver){
-        if (driver != null){
+    public static DriverDTO driverToDriverDTO(Driver driver) {
+        if (driver != null) {
             Long id = driver.getId();
             EnumAccountStatus status = EnumAccountStatus.getStatusConst(driver.getStatus());
             return new DriverDTO(id, status);

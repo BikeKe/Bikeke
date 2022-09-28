@@ -42,4 +42,13 @@ public class AccountController {
         }
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
+
+    @PostMapping("/signUp")
+    public ResponseEntity<AccountDTO> signIn(@RequestBody AccountDTO accountDTO){
+        AccountDTO accountDTO1 = accountService.save(accountDTO);
+        if(accountDTO1 != null){
+            return new ResponseEntity<>(accountDTO1, HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
 }

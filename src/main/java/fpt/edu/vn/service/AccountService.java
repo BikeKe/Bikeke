@@ -64,7 +64,10 @@ public class AccountService implements IAccountService {
 
     @Override
     public AccountDTO save(AccountDTO accountDTO) {
-
+        if(accountDTO != null){
+            Account account = ConvertUtil.accountDTOtoAccount(accountDTO);
+            return ConvertUtil.accountToAccountDTO(accountRepository.save(account));
+        }
         return null;
     }
 }
