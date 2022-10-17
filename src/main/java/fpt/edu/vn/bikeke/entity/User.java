@@ -10,6 +10,8 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "User")
+
+/*dmm thNG*/ 
 public class User {
     @Id
     private long id;
