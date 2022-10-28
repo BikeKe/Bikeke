@@ -1,6 +1,7 @@
 package fpt.edu.bikeke.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fpt.edu.bikeke.enums.EnumActive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +22,4 @@ public class Role {
     private String name;
     @Enumerated(EnumType.STRING)
     private EnumActive status;
-    @OneToMany(fetch =  FetchType.LAZY)
-    @JsonBackReference
-    private List<Account> accountList;
 }
