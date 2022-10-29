@@ -2,6 +2,7 @@ package fpt.edu.bikeke.controller;
 
 import fpt.edu.bikeke.constant.UrlConst;
 import fpt.edu.bikeke.dto.AccountDto;
+import fpt.edu.bikeke.dto.CustomerDto;
 import fpt.edu.bikeke.dto.LoginRequest;
 import fpt.edu.bikeke.dto.LoginResponse;
 import fpt.edu.bikeke.entity.Account;
@@ -12,6 +13,9 @@ import fpt.edu.bikeke.google.IGoogleService;
 import fpt.edu.bikeke.jwt.CustomUserDetails;
 import fpt.edu.bikeke.jwt.JwtUtils;
 import fpt.edu.bikeke.service.IAccountService;
+import fpt.edu.bikeke.service.ICustomerService;
+import fpt.edu.bikeke.service.IDriverService;
+import fpt.edu.bikeke.utils.MappingUtils;
 import fpt.edu.bikeke.utils.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,13 +27,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
 public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
     private IAccountService accountService;
+
+    @Autowired
+    private ICustomerService customerService;
+
+    @Autowired
+    private IDriverService driverService;
 
     @Autowired
     private IGoogleService googleService;
@@ -51,6 +60,8 @@ public class AuthController {
                 accountDto.setStatus(EnumActive.ACTIVE);
 
                 accountService.create(accountDto);
+                Account account = accountService.getAccountByEmail(accountDto.getEmail());
+                driverService.create(account);
             }
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(googleProfile.getEmail(), googleProfile.getUserId())
@@ -77,6 +88,8 @@ public class AuthController {
                 accountDto.setStatus(EnumActive.ACTIVE);
 
                 accountService.create(accountDto);
+                Account account = accountService.getAccountByEmail(accountDto.getEmail());
+                customerService.create(account);
             }
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(googleProfile.getEmail(), googleProfile.getUserId())

@@ -32,19 +32,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        try {
-            String jwt = getJwtFromRequest(request);
-            if (StringUtils.hasText(jwt) && jwtUtils.validateJwt(jwt)) {
-                String email = jwtUtils.getEmailFromJwt(jwt);
-                UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-                if (userDetails != null) {
-                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                    authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                }
+        String jwt = getJwtFromRequest(request);
+        if (StringUtils.hasText(jwt) && jwtUtils.validateJwt(jwt)) {
+            String email = jwtUtils.getEmailFromJwt(jwt);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+            if (userDetails != null) {
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         filterChain.doFilter(request, response);
     }

@@ -37,12 +37,7 @@ public class JwtUtils {
     }
 
     public boolean validateJwt(String jwt) {
-        try {
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(jwt);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
+        Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(jwt);
+        return true;
     }
 }
