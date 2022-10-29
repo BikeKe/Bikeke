@@ -47,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests().antMatchers(UrlConst.ADMIN_AUTHENTICATE, UrlConst.CUSTOMER_AUTHENTICATE, UrlConst.DRIVER_AUTHENTICATE).permitAll()
-                .antMatchers("/random").hasRole(EnumRole.ADMIN.toString())
+                .antMatchers(UrlConst.ROLE + "/**", UrlConst.CUSTOMER + "/**", UrlConst.DRIVER + "/**").hasRole(EnumRole.ADMIN.toString())
                 .anyRequest().authenticated();
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
