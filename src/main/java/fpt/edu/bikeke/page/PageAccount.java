@@ -1,5 +1,6 @@
-package fpt.edu.bikeke.dto;
+package fpt.edu.bikeke.page;
 
+import fpt.edu.bikeke.dto.AccountDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

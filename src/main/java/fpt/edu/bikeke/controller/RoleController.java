@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,7 +23,7 @@ public class RoleController {
     public ResponseEntity<Iterable<RoleDto>> findAll() {
         List<RoleDto> roleDtoList = roleService.findAll();
         if (roleDtoList == null) {
-            throw new AppException(404, "No role found");
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
         }
         return new ResponseEntity<>(roleDtoList, HttpStatus.OK);
     }
@@ -31,7 +32,7 @@ public class RoleController {
     public ResponseEntity<RoleDto> findById(@PathVariable Long id) {
         RoleDto roleDto = roleService.findById(id);
         if (roleDto == null) {
-            throw new AppException(404, "Not found role with id: " + id);
+            return new ResponseEntity<>(new RoleDto(), HttpStatus.OK);
         }
         return new ResponseEntity<>(roleDto, HttpStatus.OK);
     }

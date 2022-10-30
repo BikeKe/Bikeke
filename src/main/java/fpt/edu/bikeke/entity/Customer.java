@@ -21,7 +21,4 @@ public class Customer {
     @JoinColumn(name = "accountId")
     private Account account;
     private int totalTrip;
-    @OneToMany(fetch = FetchType.LAZY)
-    @JsonBackReference
-    private List<CustomerRouteRate> customerRouteRateList;
 }
