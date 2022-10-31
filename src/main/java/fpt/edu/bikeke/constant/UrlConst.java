@@ -19,4 +19,18 @@ public class UrlConst {
 //    Driver
     public static final String DRIVER = "/driver";
     public static final String DRIVER_FIND_ALL = "/driver/all";
+
+    //CustomerRouteRateController
+
+    public static final String CUSTOMER_ROUTE_RATE = "/customerRouteRate";
+    public static final String CUSTOMER_ROUTE_RATE_FIND_ALL = "/customerRouteRate/all";
+
+    //BikeBrandController
+    public static final String BIKEBRAND = "/bikeBrand";
+    public static final String BIKEBRAND_FIND_ALL = "/bikeBrand/all";
+
+    //Driver-Route Rate
+
+    public static final String DRIVER_ROUTE_RATE = "/driverRouteRate";
+    public static final String DRIVER_ROUTE_RATE_FIND_ALL = "/driverRouteRate/all";
 }

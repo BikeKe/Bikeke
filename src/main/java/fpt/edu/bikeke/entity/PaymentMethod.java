@@ -13,22 +13,14 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Station")
-public class Station {
+@Table(name = "PaymentMethod")
+public class PaymentMethod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String address;
-    private String img;
-    private float latitude;
-    private float longtitude;
     @Enumerated(EnumType.STRING)
     private EnumActive status;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    @JsonBackReference
-    private List<CustomerTrip> cusTrip;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JsonBackReference
@@ -36,5 +28,5 @@ public class Station {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JsonBackReference
-    private List<RouteStation> routeStationList;
+    private List<Payment> payList;
 }

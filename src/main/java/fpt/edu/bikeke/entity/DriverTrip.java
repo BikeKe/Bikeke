@@ -7,34 +7,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Station")
-public class Station {
+@Table(name = "DriverTrip")
+public class DriverTrip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String address;
-    private String img;
-    private float latitude;
-    private float longtitude;
+    @ManyToOne
+    @JoinColumn(name = "routeSlotId")
+    private RouteSlot routeSlot;
+    private Timestamp createdDate;
     @Enumerated(EnumType.STRING)
     private EnumActive status;
-
     @OneToMany(fetch = FetchType.LAZY)
     @JsonBackReference
-    private List<CustomerTrip> cusTrip;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    @JsonBackReference
-    private List<CustomerTrip> cusList;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    @JsonBackReference
-    private List<RouteStation> routeStationList;
+    private List<Trip> tripList;
 }
