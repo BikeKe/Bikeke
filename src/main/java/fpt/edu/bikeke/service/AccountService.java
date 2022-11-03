@@ -1,7 +1,7 @@
 package fpt.edu.bikeke.service;
 
 import fpt.edu.bikeke.dto.AccountDto;
-import fpt.edu.bikeke.dto.PageAccount;
+import fpt.edu.bikeke.page.PageAccount;
 import fpt.edu.bikeke.entity.Account;
 import fpt.edu.bikeke.entity.Role;
 import fpt.edu.bikeke.repository.AccountRepository;
@@ -59,7 +59,7 @@ public class AccountService implements IAccountService {
         Role role = roleRepostiory.findById(roleId).get();
         Page<Account> pageAccount = accountRepository.findAllByRole(role, PageRequest.of(page, 10));
 //        List<Account> accountList = accountRepository.findAllByRole(role, PageRequest.of(page, 10));
-        if (pageAccount.getContent() != null) {
+        if (!pageAccount.getContent().isEmpty()) {
             List<AccountDto> accountDtoList = new ArrayList<>();
             for (Account account : pageAccount.getContent()) {
                 accountDtoList.add(MappingUtils.toAccountDto(account));
