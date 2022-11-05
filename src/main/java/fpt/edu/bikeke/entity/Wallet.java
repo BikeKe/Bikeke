@@ -7,24 +7,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Station")
-public class Station {
+@Table(name = "Wallet")
+public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String address;
-    private String img;
-    private float latitude;
-    private float longtitude;
+
+    @ManyToOne
+    @JoinColumn(name = "accountId")
+    private Account account;
+    private float balance;
+
+    private String currency;
     @Enumerated(EnumType.STRING)
     private EnumActive status;
+    private Timestamp createdDate;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JsonBackReference
@@ -32,9 +36,6 @@ public class Station {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JsonBackReference
-    private List<CustomerTrip> cusList;
+    private List<Transaction> transactionList;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JsonBackReference
-    private List<RouteStation> routeStationList;
 }

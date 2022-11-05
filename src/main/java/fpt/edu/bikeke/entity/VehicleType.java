@@ -1,21 +1,18 @@
 package fpt.edu.bikeke.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import fpt.edu.bikeke.enums.EnumActive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Role")
-public class Role {
+@Table(name = "VehicleType")
+public class VehicleType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
